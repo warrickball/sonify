@@ -1,0 +1,18 @@
+&controls
+    user_seed = 7001097
+    cadence = 30d0
+    n_cadences = 441000 ! 44100 per second
+    n_relax = 8640
+    n_fine = 50
+    sig = 60d0
+    rho = 0.45d0
+    tau = 250d0         ! timescale of granulation, in seconds
+    inclination = 90d0         ! inclination angle, in degrees
+    p(1) = 1.52355d0      ! visibility of l=1 modes relative to l=0
+    p(2) = 0.565349d0     ! visibility of l=2 modes relative to l=0
+    p(3) = 0.0361707d0    ! visibility of l=3 modes relative to l=0
+    add_granulation = .false.
+    modes_filename = 'modelS.con'
+    rotation_filename = 'modelS.rot'
+    output_filename = 'modelS.asc'  ! output file
+/

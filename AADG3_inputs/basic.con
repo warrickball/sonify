@@ -1,0 +1,5 @@
+  0   21   332.5774754346183   9.0    250.0    0.0
+! data sampling rate = 1/60 Hz
+! sound sampling rate = 22050 Hz
+! means 3000 uHz -> 3000/(1/60)*22050 = 3969 Hz ~B7
+! or 440 Hz <- 332.577 uHz

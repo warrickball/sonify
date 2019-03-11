@@ -21,6 +21,8 @@ parser.add_argument('--rate', type=int, default=44100,
 parser.add_argument('--N', type=int, default=None,
                     help="number of samples (default=n_cadences from "
                     "AADG3 input file)")
+parser.add_argument('--white-noise', type=float, default=0.0,
+                    help="white noise level (default=0)")
 args = parser.parse_args()
 
 TAU = 2.*np.pi
@@ -44,7 +46,13 @@ for row in modes:
     freq = row['freq']/1e6  # uHz -> Hz
     x += height*E[l][0]*np.sin(TAU*(freq*t + np.random.rand()))
 
+    if nml['inclination'] == 0.0:
+        continue
+    
     for m in range(1, l+1):
+        if nml['inclination'] == 90.0 and (l+m)%2==1:
+            continue
+        
         split = rot[(rot['l']==l)
                     &(rot['m']==m)
                     &(rot['n']==row['n'])]['splitting']/1e6
@@ -55,5 +63,6 @@ for row in modes:
             np.sin(TAU*((freq + m*split)*t + np.random.rand())) +
             np.sin(TAU*((freq - m*split)*t + np.random.rand())))
 
+x += args.white_noise*np.random.randn(len(x))
 x = x/np.max(np.abs(x))
 sf.write(args.ogg, x, args.rate)
